@@ -14,13 +14,13 @@ export const createQuestion = async (req, res, next) => {
 
 export const getAll = async (req, res, next) => {
     try {
-        let {limit, slide} = req.query
+        let {limit, slide, testId} = req.query
         slide = parseInt(slide) || 1
         limit = parseInt(limit) || 1
         let offset = slide * limit - limit
         let questions
 
-        questions = await Question.findAll({offset, limit})
+        questions = await Question.findAll({where: {testId}, offset, limit})
 
         return res.json(questions)
     } catch (err) {
