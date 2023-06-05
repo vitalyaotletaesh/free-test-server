@@ -24,7 +24,8 @@ app.use('/', router)
 app.use(errorHandler)
 
 const PORT = process.env.PORT || 10000
-const HOSTNAME = process.env.HOSTNAME || 'localhost'
+// const HOSTNAME = process.env.HOSTNAME || 'localhost'
+const HOSTNAME = 'free-test-server.onrender.com'
 
 async function start() {
     try {
