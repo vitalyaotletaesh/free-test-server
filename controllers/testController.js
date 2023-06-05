@@ -2,6 +2,7 @@ import {Question, Test} from "../models/models.js"
 import {v4 as uuidv4} from 'uuid'
 import path from 'path'
 import {fileURLToPath} from 'url'
+import fs from 'fs'
 
 import {ApiError} from "../error/ApiError.js"
 import {where} from "sequelize";
@@ -15,6 +16,10 @@ export const createTest = async (req, res, next) => {
 
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(__filename);
+
+        if (!fs.existsSync('static')) {
+            fs.mkdirSync('static')
+        }
 
         await img.mv(path.resolve(__dirname, '..', 'static', filename))
 
