@@ -23,7 +23,7 @@ app.use(fileUpload({}))
 app.use('/', router)
 app.use(errorHandler)
 
-const PORT = process.env.PORT || 10000
+const PORT = process.env.PORT || 4444
 const HOSTNAME = process.env.HOSTNAME || 'localhost'
 
 async function start() {
