@@ -24,12 +24,13 @@ app.use('/api', router)
 app.use(errorHandler)
 
 const PORT = process.env.PORT || 4444
+const HOSTNAME = process.env.HOSTNAME || 'localhost'
 
 async function start() {
     try {
         await sequelize.authenticate()
         await sequelize.sync()
-        app.listen(PORT, () => console.log(`-- Server started on port: ${PORT} --`))
+        app.listen(PORT, HOSTNAME, () => console.log(`-- Server started on port: ${PORT} --`))
     } catch (err) {
         console.log(err)
     }
