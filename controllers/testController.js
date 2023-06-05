@@ -19,6 +19,7 @@ export const createTest = async (req, res, next) => {
 
         if (!fs.existsSync('static')) {
             fs.mkdirSync('static')
+            console.log('qwe')
         }
 
         await img.mv(path.resolve(__dirname, '..', 'static', filename))
