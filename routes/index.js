@@ -9,6 +9,6 @@ import categoryRouter from "./categoryRouter.js";
 router.use('/auth', authRouter)
 router.use('/test', testRouter)
 router.use('/question', questionRouter)
-router.use('/api/category', categoryRouter)
+router.use('/category', categoryRouter)
 
 export default router
