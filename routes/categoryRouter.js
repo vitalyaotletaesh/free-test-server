@@ -4,9 +4,9 @@ import {checkRoleMiddleware} from "../middleware/checkRoleMiddleware.js"
 
 const router = new Router()
 
-router.post('/create', checkRoleMiddleware('ADMIN'), createCategory)
+router.post('/create', createCategory)
 router.get('/', getAll)
 router.get('/:id', getOne)
-router.delete('/delete/:id', checkRoleMiddleware('ADMIN'), deleteCategory)
+router.delete('/delete/:id', deleteCategory)
 
 export default router

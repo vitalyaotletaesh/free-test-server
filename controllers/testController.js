@@ -1,4 +1,4 @@
-import {Question, Test} from "../models/models.js"
+import {Question, Statistic, Test} from "../models/models.js"
 import {v4 as uuidv4} from 'uuid'
 import path from 'path'
 import {fileURLToPath} from 'url'
@@ -10,7 +10,7 @@ import {where} from "sequelize";
 
 export const createTest = async (req, res, next) => {
     try {
-        const {name, userId, categoryId} = req.body
+        const {name, userId, categoryId, showAnnotation} = req.body
         const {img} = req.files
         let filename = uuidv4() + ".jpg"
 
@@ -25,7 +25,7 @@ export const createTest = async (req, res, next) => {
         await img.mv(path.resolve(__dirname, '..', 'static', filename))
 
 
-        const test = await Test.create({name, userId, img: filename, categoryId})
+        const test = await Test.create({name, userId, img: filename, categoryId, showAnnotation})
 
         return res.json(test)
     } catch (err) {
@@ -101,6 +101,17 @@ export const getMy = async (req, res, next) => {
         const myTests = await Test.findAll({where: {userId: id}})
 
         return res.json({myTests: myTests})
+    } catch (err) {
+        next(ApiError.badRequest(err.message))
+    }
+}
+
+export const incCompletes = async (req, res, next) => {
+    try {
+        const {id} = req.body
+        const completes = await Test.increment('completes', {by: 1, where: {id}})
+
+        return res.json(completes)
     } catch (err) {
         next(ApiError.badRequest(err.message))
     }

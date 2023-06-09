@@ -6,7 +6,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 import sequelize from './db.js'
-import {User, Test, Question, Attempt, Testing} from './models/models.js'
+import {User, Test, Question, Attempt, Annotation, Category, Statistic} from './models/models.js'
 import router from "./routes/index.js"
 import {errorHandler} from './middleware/ErrorHandlingMiddleware.js'
 

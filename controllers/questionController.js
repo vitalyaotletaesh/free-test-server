@@ -1,5 +1,7 @@
 import {Question, Test} from "../models/models.js";
 import {ApiError} from "../error/ApiError.js";
+import {Sequelize} from "sequelize";
+import sequelize from "../db.js";
 
 export const createQuestion = async (req, res, next) => {
     try {
@@ -23,6 +25,21 @@ export const getAll = async (req, res, next) => {
         questions = await Question.findAll({where: {testId}, offset, limit})
 
         return res.json(questions)
+    } catch (err) {
+        next(ApiError.badRequest(err.message))
+    }
+}
+
+export const getLastId = async (req, res, next) => {
+    try {
+        const id = await Question.findAll({
+            attributes: [
+                [sequelize.fn('MAX', sequelize.col('id')), 'id'],
+            ],
+            row: true
+        })
+
+        return res.json(id)
     } catch (err) {
         next(ApiError.badRequest(err.message))
     }
