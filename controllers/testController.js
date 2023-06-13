@@ -54,9 +54,6 @@ export const getAll = async (req, res, next) => {
         limit = parseInt(limit) || 9
         let offset = page * limit - limit
         let tests
-
-        console.log(page)
-
         if (!categoryId && !name) {
             tests = await Test.findAndCountAll({offset, limit})
         }
@@ -69,8 +66,6 @@ export const getAll = async (req, res, next) => {
         if (categoryId && name) {
             tests = await Test.findAndCountAll({where: {categoryId, name}, limit, offset})
         }
-
-
         return res.json(tests)
     } catch (err) {
         next(ApiError.badRequest(err.message))
