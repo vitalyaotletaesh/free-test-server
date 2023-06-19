@@ -41,7 +41,8 @@ export const deleteTest = async (req, res, next) => {
     try {
         const {id} = req.params
         await Test.destroy({where: {id}})
-        return res.json({message: 'Тест успешно удалён'})
+        const tests = await Test.findAll()
+        return res.json({message: 'Тест успешно удалён', tests})
     } catch (err) {
         next(ApiError.badRequest(err.message))
     }
