@@ -55,3 +55,12 @@ export const getAll = async (req, res, next) => {
         next(ApiError.badRequest(err.message));
     }
 };
+
+export const getAttempts = async (req, res, next) => {
+    try {
+        const attempts = await Attempt.findAll();
+        return res.json(attempts);
+    } catch (err) {
+        next(ApiError.badRequest(err.message));
+    }
+};
